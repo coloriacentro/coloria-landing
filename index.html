@@ -1072,14 +1072,16 @@
 
           <div class="form-card">
             <!-- Este formulario no envía sin backend. Luego lo conectamos a email. -->
-            <form onsubmit="event.preventDefault(); alert('Formulario listo. Conéctalo a email/Make/n8n o añade un endpoint.');">
-              <label for="perfil">Soy…</label>
-              <select id="perfil" required>
-                <option value="" selected disabled>Selecciona una opción</option>
-                <option>Familia</option>
-                <option>Centro educativo / Docente</option>
-                <option>Otro</option>
-              </select>
+            <form action="https://formspree.io/f/xeelekjj" method="POST">
+            <label for="perfil">Soy...</label>
+            <select id="perfil" name="perfil" required>
+            <option value="" selected disabled>Selecciona una opción</option>
+            <option value="Familia">Familia</option>
+            <option value="Centro educativo / Docente">Centro educativo / Docente</option>
+            <option value="Otro">Otro</option>
+            </select>
+
+
 
               <label for="nombre">Nombre</label>
               <input id="nombre" type="text" placeholder="Tu nombre" required>
