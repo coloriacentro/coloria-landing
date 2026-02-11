@@ -196,10 +196,13 @@
     /* Photo collage */
     .collage{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:16px;
+      grid-template-columns: 2fr 1fr;
+      gap:24px;
       margin-top: 26px;
-    }
+    }.photo-sesiones {
+  grid-row: span 2;
+}
+
     @media (max-width: 980px){ .collage{grid-template-columns:1fr} }
     .photo{
       border-radius: var(--radius);
@@ -632,7 +635,110 @@
     0 18px 36px rgba(17, 24, 39, 0.10),
     0 2px 0 rgba(255,255,255,0.85) inset;
   transition: transform .18s ease, box-shadow .18s ease;
+}/* ===== MINI PORTADA PRODUCTOS ===== */
+
+.product-img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain; /* NO recorta la imagen */
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  margin: 18px 0 22px 0;
+  box-shadow: 
+    0 25px 50px rgba(0,0,0,0.08),
+    0 8px 20px rgba(0,0,0,0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
+
+.card:hover .product-img {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 35px 60px rgba(0,0,0,0.10),
+    0 12px 25px rgba(0,0,0,0.08);
+}.logo-img {
+  height: 48px;
+  width: auto;
+  padding: 6px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}/* Imágenes horizontales */
+.photo img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+}/* Imagen vertical */
+.photo.vertical img {
+  height: 420px;
+  object-fit: contain;
+  background: #fff;
+  padding: 10px;
+}/* Vertical: se ve completa (contain) + fondo suave para que no quede fea */
+.photo.portrait{
+  position: relative;
+  overflow: hidden;
+}
+
+.photo.portrait .bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  filter: blur(14px);
+  transform: scale(1.12);
+  opacity: .35;
+}
+
+.photo.portrait .fg{
+  position:absolute;
+  inset: 0;
+  margin:auto;
+  width: 86%;
+  height: 86%;
+  object-fit: contain;     /* CLAVE: NO corta */
+  border-radius: 18px;
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 14px 35px rgba(0,0,0,.16);
+}/* Ajuste SOLO para Sesiones con intención */
+.photo.sesiones {
+  aspect-ratio: 4 / 3;   /* La hace más horizontal y elegante */
+  height: auto;
+}
+
+.photo.sesiones img {
+  object-fit: cover;
+  object-position: center;
+}/* ✅ Base: que las fotos SIEMPRE recorten y no dejen blanco */
+.photo{
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.photo img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* rellena sin bordes blancos */
+  object-position: center;   /* centrada */
+}
+
+/* ✅ SOLO “Sesiones con intención”: define altura y que la imagen ocupe todo */
+.photo.sesiones{
+  aspect-ratio: 16 / 9;      /* misma proporción “bonita” que la de arriba */
+  background: transparent;   /* por si tenías fondo blanco */
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -649,16 +755,8 @@
   <div class="container">
     <div class="nav">
       <a class="brand" href="#top">
-        <span class="mark" aria-hidden="true">
-          <!-- Mini arcoíris -->
-          <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-            <path d="M12 44C12 27.4 25.4 14 42 14" stroke="var(--c1)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M18 44C18 30.7 28.7 20 42 20" stroke="var(--c2)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M24 44C24 34 32 26 42 26" stroke="var(--c3)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M30 44C30 37.3 35.3 32 42 32" stroke="var(--c5)" stroke-width="8" stroke-linecap="round"/>
-            <path d="M36 44C36 40.7 38.7 38 42 38" stroke="var(--c4)" stroke-width="8" stroke-linecap="round"/>
-          </svg>
-        </span>
+        <img src="img/logo-coloria.jpg.png" alt="Coloria Centro" class="logo-img">
+
         <span class="name">
           <strong>Coloria Centro</strong>
           <span>Puerto Real · Coloria · Casa · Cole</span>
@@ -743,7 +841,7 @@
 
       <!-- Collage: cambia src por tus fotos -->
       <div class="collage">
-        <div class="photo">
+        <div class="photo sesiones">
           <img src="img/hero-actividad.jpg.png" alt="Actividad en Coloria" />
           <div class="cap">Sesiones con intención</div>
         </div>
@@ -753,8 +851,12 @@
             <div class="cap">Vínculo</div>
           </div>
           <div class="photo">
-            <img src="img/hero-material.jpg.png" alt="Materiales visuales de Coloria" />
-            <div class="cap">Material visual</div>
+            <div class="photo">
+  <img src="img/hero-material.jpg.png" alt="Material visual" />
+  <div class="cap">Material visual</div>
+</div>
+
+          
           </div>
         </div>
       </div>
@@ -965,6 +1067,9 @@
           <div class="prod">
             <div class="tag">Cuaderno</div>
             <h3>Cuaderno del Otoño (50 páginas)</h3>
+            <img src="img/cuaderno-otono.jpg.png"
+                 alt="Cuaderno del Otoño Coloria"
+                 class="product-img">
             <p>Actividades visuales para vocabulario, atención, lenguaje y aprendizajes funcionales con temática de otoño.</p>
             <div class="price"><strong>5€</strong><span>descarga digital</span></div>
             <div class="actions">
@@ -976,6 +1081,9 @@
           <div class="prod">
             <div class="tag">Descarga gratis</div>
             <h3>Historia social: Cumpleaños</h3>
+            <img src="img/historia-cumple.jpg.png"
+                alt="Historia social Cumpleaños Coloria"
+                class="product-img">
             <p>Secuencia visual para anticipar el día del cumpleaños y acompañar la participación desde la seguridad.</p>
             <div class="price"><strong>0€</strong><span>descarga</span></div>
             <div class="actions">
@@ -986,7 +1094,10 @@
 
           <div class="prod">
             <div class="tag">Juego</div>
-            <h3>Lotos</h3>
+            <h3>Lotos (47 páginas)</h3>
+            <img src="img/lotos.jpg.png"
+                 alt="Lotos Coloria material visual"
+                 class="product-img">
             <p>Formato loto para trabajar lenguaje y objetivos específicos de forma motivadora y muy visual.</p>
             <div class="price"><strong>7€</strong><span>descarga digital</span></div>
             <div class="actions">
@@ -998,6 +1109,9 @@
           <div class="prod">
             <div class="tag">Rutinas</div>
             <h3>Material de Asamblea</h3>
+            <img src="img/asamblea.jpg"
+                 alt="Material de Asamblea Coloria"
+                 class="product-img">
             <p>Soportes visuales para nociones temporales y rutinas. Ideal para aula y casa.</p>
             <div class="price"><strong>2€</strong><span>descarga digital</span></div>
             <div class="actions">
@@ -1008,7 +1122,10 @@
 
           <div class="prod">
             <div class="tag">Lenguaje</div>
-            <h3>Morfo animales</h3>
+            <h3>Morfo animales (70 páginas)</h3>
+            <img src="img/morfo.jpg.png"
+                 alt="Morfo animales Coloria"
+                 class="product-img">
             <p>Propuestas por niveles para estructura de frase, comprensión y expresión con apoyo visual.</p>
             <div class="price"><strong>10€</strong><span>descarga digital</span></div>
             <div class="actions">
@@ -1072,31 +1189,29 @@
 
           <div class="form-card">
             <!-- Este formulario no envía sin backend. Luego lo conectamos a email. -->
-            <form action="https://formspree.io/f/xeelekjj" method="POST">
-            <label for="perfil">Soy...</label>
-            <select id="perfil" name="perfil" required>
-            <option value="" selected disabled>Selecciona una opción</option>
-            <option value="Familia">Familia</option>
-            <option value="Centro educativo / Docente">Centro educativo / Docente</option>
-            <option value="Otro">Otro</option>
-            </select>
+            
 
+  <label for="nombre">Nombre</label>
+  <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
 
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" placeholder="tuemail@..." required />
 
-              <label for="nombre">Nombre</label>
-              <input id="nombre" type="text" placeholder="Tu nombre" required>
+  <label for="mensaje">Mensaje</label>
+  <textarea
+    id="mensaje"
+    name="mensaje"
+    rows="5"
+    placeholder="Cuéntanos brevemente qué necesitas (edad, preocupación, contexto casa/colegio...)"
+    required
+  ></textarea>
 
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="tuemail@..." required>
+  <!-- opcional (PRO): asunto y anti-spam -->
+  <input type="hidden" name="_subject" value="Nuevo formulario - Coloria Centro" />
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
-              <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" placeholder="Cuéntanos brevemente qué necesitas (edad, preocupación, contexto casa/colegio y si te interesan materiales)." required></textarea>
+  <button class="btn primary" type="submit" style="width:100%;">Enviar</button>
 
-              <button class="btn primary" type="submit" style="width:100%;">Enviar</button>
-
-              <div class="fine">
-                Puerto Real · Atención temprana · Lenguaje · Reeducación pedagógica · Asesoría a centros
-              </div>
             </form>
           </div>
         </div>
